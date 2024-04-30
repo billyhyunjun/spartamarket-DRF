@@ -56,6 +56,22 @@ class AccountUserAPI(APIView):
         user = self.get_object(username)  # username에 맞는 데이터 가져오기
         serializer = UserSerializer(user)  # serializer 형식에 맞추어서 데이터 생성
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    # 팔로잉
+    def post(self, request, username):
+        user = self.get_object(username)
+        if user != request.user:
+            if user in request.user.following.all():
+                # 이미 팔로우 중인 경우 팔로우 취소
+                request.user.following.remove(user)
+                return Response({"Message": "User unfollowed successfully!"}, status=status.HTTP_200_OK)
+            else:
+                # 아직 팔로우 중이 아닌 경우 팔로우
+                request.user.following.add(user)
+                return Response({"Message": "User followed successfully!"}, status=status.HTTP_200_OK)
+        else:
+            # 로그인 정보가 같다면 에러
+            return Response({"Error": "Same token id."}, status=status.HTTP_400_BAD_REQUEST)
 
     # 유저 프로필 수정
     def put(self, request, username):
@@ -92,6 +108,10 @@ def password(request):
     if not check_password(current_password, user.password):
         return Response("Error: Incorrect current password", status=status.HTTP_400_BAD_REQUEST)
 
+    # 새로운 비밀번호와 기존 비밀번호 확인
+    if new_password == current_password:
+        return Response("Error: New password and current_password match", status=status.HTTP_400_BAD_REQUEST)
+    
     # 새로운 비밀번호와 확인용 비밀번호 일치 여부 확인
     if new_password != confirm_password:
         return Response("Error: New password and confirm password do not match", status=status.HTTP_400_BAD_REQUEST)

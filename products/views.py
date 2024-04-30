@@ -67,6 +67,22 @@ class ProductDetailView(APIView):
         serializer = ProductDetailSerializer(product)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+    # 좋아요
+    def post(self, request, product_id):
+        product = self.get_object(product_id)
+        if product.author != request.user:
+            if request.user in product.like_users.all():
+                # 이미 좋아요 중인 경우 좋아요 취소
+                product.like_users.remove(request.user)
+                return Response({"Message": "Product dislike successfully!"}, status=status.HTTP_200_OK)
+            else:
+                # 아직 좋아요 중이 아닌 경우 팔로우
+                product.like_users.add(request.user)
+                return Response({"Message": "Product like successfully!"}, status=status.HTTP_200_OK)
+        else:
+            # 로그인 정보가 같다면 에러
+            return Response({"Error": "Same token id."}, status=status.HTTP_400_BAD_REQUEST)
+    
     # 게시글 수정
     def put(self, request, product_id):
         product = self.get_object(product_id)
