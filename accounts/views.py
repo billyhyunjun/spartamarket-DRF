@@ -8,72 +8,80 @@ from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
-from rest_framework_simplejwt.token_blacklist.models import OutstandingToken # 어떻게 하는거야....
+from rest_framework_simplejwt.tokens import RefreshToken
+# 어떻게 하는거야....
 
 
 class AccountAPI(APIView):
+    # 회원가입
     def post(self, request):
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            # 비밀번호를 해싱하여 설정
-            password = request.data.get('password')
-            hashed_password = make_password(password)
-            serializer.validated_data['password'] = hashed_password
+        serializer = UserSerializer(data=request.data)  # 유저 폼에 맞추어 데이터 넣기
+        if serializer.is_valid(raise_exception=True):  # 유효성 검사
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class LogoutView(APIView):
-
+    # 로그인상태
     permission_classes = [IsAuthenticated]
 
-    def post(slfe, request):
-        if request.auth:
-            # 블랙리스트에 토큰 추가
-            token = request.auth
-            token.blacklist()
+    # 로그아웃 처리
+    def post(self, request):
+        try:
+            refresh_token = request.data['refresh']
+            RefreshToken(refresh_token).blacklist()
+            # 클라이언트의 쿠기 삭제
+            response = Response({
+                "message": "Logout success"
+                }, status=status.HTTP_202_ACCEPTED)
+            response.delete_cookie("accessToken")
+            response.delete_cookie("refreshToken")
+            return response
+        except Exception as e:
+            return Response({"detail": "Invalid refresh token."}, status=status.HTTP_400_BAD_REQUEST)
 
-            # 로그아웃 처리 후 추가 작업 수행
-            return Response({"detail": "Successfully logged out."}, status=status.HTTP_200_OK)
-        else:
-            return Response({"detail": "No token provided."}, status=status.HTTP_400_BAD_REQUEST)
+        
 
 
 class AccountUserAPI(APIView):
-
+    # 로그인상태
     permission_classes = [IsAuthenticated]
 
+    # db에서 username 자료 가져오기
     def get_object(self, username):
         return get_object_or_404(User, username=username)
 
+    # 유저 프로필 확인
     def get(self, request, username):
-        user = self.get_object(username)
-        serializer = UserSerializer(user)
+        user = self.get_object(username)  # username에 맞는 데이터 가져오기
+        serializer = UserSerializer(user)  # serializer 형식에 맞추어서 데이터 생성
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    # 유저 프로필 수정
     def put(self, request, username):
         user = self.get_object(username)
-        if user == request.user:
+        if user == request.user:  # 현재 수정할려는 username의 정보와 내 로그인 정보가 같은지
+            # user 정보에 내가 입력한 데이터 request.data의 값을 넣고 공란은 기존의 값으로
             serializer = UserSerializer(
                 user, data=request.data, partial=True)
-            if serializer.is_valid(raise_exception=True):
+            if serializer.is_valid(raise_exception=True):  # 유효성 틀리면 알아서 에러 메세지 나옴
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
-            else:
-                return Response("Error: Please conform to the format", status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response("Error: Another token id", status=status.HTTP_400_BAD_REQUEST)
+            # 로그인 정보가 다르다면 에러
+            return Response({"Error": "Another token id."}, status=status.HTTP_400_BAD_REQUEST)
 
+    # 회원 탈퇴
     def delete(self, request, username):
         user = self.get_object(username)
-        if user == request.user:
+        if user == request.user:  # 현재 로그인아이디랑 같은지
             user.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
-        return Response("Error: Another token id", status=status.HTTP_400_BAD_REQUEST)
+        return Response({"Error": "Another token id."}, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(["PUT"])
-@permission_classes([IsAuthenticated])
+@api_view(["PUT"])  # put입력만 받기
+@permission_classes([IsAuthenticated])  # 지금 로그인 중인지
 def password(request):
     user = request.user
     current_password = request.data.get('current_password')
