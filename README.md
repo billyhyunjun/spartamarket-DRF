@@ -225,35 +225,26 @@ https://app.diagrams.net/#G1VK_R85V6tnn5qrfNOdDxszWH0Wu17HJT#%7B%22pageId%22%3A%
 </div>
 </details>
 
-
 ## 📌 Key Features
 
-### 1. Post CRUD
-   - Users can create new posts and view all posts.
-   - Posts can be edited or deleted on the post detail view page.
-
-### 2. Comment CRD
-   - All comments on the post are displayed at the bottom of the post detail view page.
-   - Users can create, view, and delete comments on the post detail page.
-
-### 3. Sign Up, Log In
-   - Membership registration is mandatory for first-time users, enabling them to log in and access the site's features.
-   - Only logged-in users can create posts, while both logged-in and anonymous users can view posts and comments.
-     
-### 5. Search Functionality
-   - Users can search for posts by movie name, article title, author, and content using the post search box.
-   - Clicking on search results directs users to the detailed page of the respective post.
-
-### 6. Like Feature
-   - Users can like posts on the post details view page.
-   - The 'Like' button toggles to 'Dislike' upon clicking and can be undone, allowing users to like a post only once.
-     
-### 8. Administrator Permissions
-   - Administrators with the ID "admin_team8" have the authority to edit or delete posts and comments, irrespective of the post's author.
-
-### 9. User Interaction
-   - Users can follow and unfollow other users, fostering a sense of community within the platform.
-   - The 'Following' list enables users to keep track of updates from their followed users.
+### Sign Up and Log In
+- New users can sign up to the site by providing their username, password, and email, all of which are mandatory fields. Duplicate usernames and emails are not allowed.
+- Registered users can log in using the username and password they provided during sign up, accessing the site's functionalities.
+### Token Refreshment
+- Upon login, users receive a refresh_token that remains valid for one day, while the access_token has a one-minute lifespan. When the access_token expires, users can use the refresh_token to obtain a new access_token.
+Profile Viewing and Editing
+- Users can view and modify their profiles. While editing profiles, changing to an email address without usage history is allowed, but an error occurs if attempting to use an email address already in use by another user.
+### Password Modification
+- Logged-in users can change their passwords. When changing passwords, they must provide their current password along with the new one and confirm it.
+### Account Deactivation
+- Logged-in users have the option to deactivate their accounts.
+### Following System
+- Users can follow other users, and the users they follow will appear on their profile.
+### Product Management: Create, Read, Update, Delete (CRUD)
+- Users can create new products and view, edit, or delete existing ones.
+### Filtering and Search Functionality
+- Users can search for posts based on various criteria such as author, title, content, hashtags, and categories.
+- Search results are sorted by the number of likes on the posts, and users can view detailed information of the relevant posts.
 
 <br> 
 
