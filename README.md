@@ -211,6 +211,16 @@ https://app.diagrams.net/#G1VK_R85V6tnn5qrfNOdDxszWH0Wu17HJT#%7B%22pageId%22%3A%
 
 ![image](https://github.com/billyhyunjun/spartamarket-DRF/assets/157565164/641f7660-941d-40f6-9be7-cd5b0e8d62d5)
 
+- 해시태그 검색
+
+![image](https://github.com/billyhyunjun/spartamarket-DRF/assets/157565164/018159bf-63b9-4401-9148-819ac3fee990)
+
+- 카테고리 검색
+
+![image](https://github.com/billyhyunjun/spartamarket-DRF/assets/157565164/1f16cb6b-e6b3-4b9f-8029-32c72044d488)
+
+
+
 
 </div>
 </details>
