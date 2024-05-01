@@ -14,11 +14,13 @@ from rest_framework_simplejwt.tokens import RefreshToken
 class AccountAPI(APIView):
     # 회원가입
     def post(self, request):
-        serializer = UserSerializer(data=request.data)  # 유저 폼에 맞추어 데이터 넣기
-        if serializer.is_valid(raise_exception=True):  # 유효성 검사
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
+        if request.data["username"] not in ["login","password","refresh","logout"]:
+            serializer = UserSerializer(data=request.data)  # 유저 폼에 맞추어 데이터 넣기
+            if serializer.is_valid(raise_exception=True):  # 유효성 검사
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response({"Error": "Can't use this username."}, status=status.HTTP_400_BAD_REQUEST)
 
 class LogoutView(APIView):
     # 로그인상태
