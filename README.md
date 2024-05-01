@@ -51,7 +51,7 @@ https://app.diagrams.net/#G1VK_R85V6tnn5qrfNOdDxszWH0Wu17HJT#%7B%22pageId%22%3A%
 ## 🖥️Poatman View
 
 <details>
-<summary>View Template (click here) </summary>
+<summary>View Json (click here) </summary>
 <div markdown="1">       
 
 ## ** 회원가입 **
