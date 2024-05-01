@@ -17,9 +17,9 @@ SpartaMarket는 Django_DRF를 이용하여 백앤드에서 자료를 받아 데�
 <br>
 
 ## 🧑‍🤝‍🧑 Development Function: 
-- ** 사용자 계정 ** : 회원가입, 로그인, 로그아웃 기능을 제공합니다. 
-- ** 상점 관리 ** : 상점 등록, 수정, 삭제, 구매, 좋아요, 해시태그, 카테고리 기능을 제공합니다. 또한 검색을 통해서 원하는 게시글을 검색 할 수 있습니다.
-- ** 유저 프로필 및 기타 기능 ** : 유저 프로필 보기, 팔로우의 기능을 지원합니다.
+- **사용자 계정** : 회원가입, 로그인, 로그아웃 기능을 제공합니다. 
+- **상점 관리** : 상점 등록, 수정, 삭제, 구매, 좋아요, 해시태그, 카테고리 기능을 제공합니다. 또한 검색을 통해서 원하는 게시글을 검색 할 수 있습니다.
+- **유저 프로필 및 기타 기능** : 유저 프로필 보기, 팔로우의 기능을 지원합니다.
 
 <br>
 
@@ -47,6 +47,8 @@ https://www.figma.com/file/KLAi2WghRyyMJGMVMDvNb8/SpartaMarket_DRF?type=whiteboa
 - **ERD**
 
 https://app.diagrams.net/#G1VK_R85V6tnn5qrfNOdDxszWH0Wu17HJT#%7B%22pageId%22%3A%22R2lEEEUBdFMjLlhIrx00%22%7D
+
+<br>
 
 ## 🖥️Poatman View
 
@@ -224,6 +226,8 @@ https://app.diagrams.net/#G1VK_R85V6tnn5qrfNOdDxszWH0Wu17HJT#%7B%22pageId%22%3A%
 
 </div>
 </details>
+
+<br>
 
 ## 📌 Key Features
 
