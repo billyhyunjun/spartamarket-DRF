@@ -9,7 +9,6 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.tokens import RefreshToken
-# 어떻게 하는거야....
 
 
 class AccountAPI(APIView):
@@ -92,7 +91,7 @@ class AccountUserAPI(APIView):
         user = self.get_object(username)
         if user == request.user:  # 현재 로그인아이디랑 같은지
             user.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            return Response({"Message": "User account delete successfully"}, status=status.HTTP_204_NO_CONTENT)
         return Response({"Error": "Another token id."}, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -106,18 +105,18 @@ def password(request):
 
     # 현재 비밀번호 확인
     if not check_password(current_password, user.password):
-        return Response("Error: Incorrect current password", status=status.HTTP_400_BAD_REQUEST)
+        return Response({"Error": "Incorrect current password"}, status=status.HTTP_400_BAD_REQUEST)
 
     # 새로운 비밀번호와 기존 비밀번호 확인
     if new_password == current_password:
-        return Response("Error: New password and current_password match", status=status.HTTP_400_BAD_REQUEST)
+        return Response({"Error": "New password and current_password match"}, status=status.HTTP_400_BAD_REQUEST)
     
     # 새로운 비밀번호와 확인용 비밀번호 일치 여부 확인
     if new_password != confirm_password:
-        return Response("Error: New password and confirm password do not match", status=status.HTTP_400_BAD_REQUEST)
+        return Response({"Error": "New password and confirm password do not match"}, status=status.HTTP_400_BAD_REQUEST)
 
     # 새로운 비밀번호 설정
     user.set_password(new_password)
     user.save()
 
-    return Response("Message: Password changed successfully!", status=status.HTTP_200_OK)
+    return Response({"Message": "Password changed successfully!"}, status=status.HTTP_200_OK)
