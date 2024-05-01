@@ -57,7 +57,7 @@ https://app.diagrams.net/#G1VK_R85V6tnn5qrfNOdDxszWH0Wu17HJT#%7B%22pageId%22%3A%
 <div markdown="1">       
 
 ## ** 회원가입 **
-- 회원가입을 위해서 username, 비밀번호, 이메일, 이름, 생일을 입력 받을 수 있으며 ID, 비밀번호, 이메일을 필수로 입력을 받으며, ID와 이메일은 중복으로 작성이 불가능합니다.
+- 회원가입을 위해서 username, 비밀번호, 이메일, 이름, 생일을 입력 받을 수 있으며 ID, 비밀번호, 이메일을 필수로 입력을 받으며, ID와 이메일은 중복으로 작성이 불가능합니다. 또한 특수한 username은 제한되어 설정 할 수 없도록 하여 주소 입력에 혼동이 되지 않도록 하였습니다.
 
 ![image](https://github.com/billyhyunjun/spartamarket-DRF/assets/157565164/e913ed79-bb0b-48ba-8d81-7d6d2effb52d)
 
@@ -78,7 +78,6 @@ https://app.diagrams.net/#G1VK_R85V6tnn5qrfNOdDxszWH0Wu17HJT#%7B%22pageId%22%3A%
 - 주소끝에 유저의 ID를 적어 해당 유저의 프로필을 확인 할 수 있습니다.
 
 ![image](https://github.com/billyhyunjun/spartamarket-DRF/assets/157565164/2cc0df55-ffc6-41f3-a606-c17804d07c76)
-
 
 
 ## ** 로그아웃 **
