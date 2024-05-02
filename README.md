@@ -1,1 +1,0 @@
-# spartamarket-DRF
