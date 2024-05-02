@@ -20,7 +20,7 @@ class Product(models.Model):
     price = models.PositiveIntegerField()   
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField(upload_to="image/", blank=True)
+    image = models.ImageField(blank=True, null=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="stores")
     
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="like_articles")
