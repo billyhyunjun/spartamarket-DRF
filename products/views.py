@@ -46,7 +46,7 @@ class ProductsView(APIView):
         hashtags = request.data.get("hashtags")
         request.data["author"] = request.user.id
         serializer = ProductSerializer(data=request.data)
-        # 유효성 검사
+        # 유효성 검사.
         if serializer.is_valid(raise_exception=True):
             # 일단 해시태그가 없는 값으로 먼저 저장
             serializer.save()
