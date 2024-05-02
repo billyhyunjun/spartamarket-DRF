@@ -8,9 +8,14 @@ from rest_framework.permissions import IsAuthenticated
 from .serializer import ProductSerializer, ProductDetailSerializer, CommentSerializer
 from accounts.models import User
 from django.db.models import Count
+from rest_framework.pagination import PageNumberPagination
 
 
 class ProductsView(APIView):
+    pagination_class = PageNumberPagination
+    # 한 페이지에 보여줄 항목 수 설정
+    pagination_class.page_size = 10
+    
     # 상점 목록 보기
     def get(self, request):
         # 정렬 조건이 있다면 정렬해서 표기
@@ -24,8 +29,13 @@ class ProductsView(APIView):
         # 정렬 조건이 없으면 모든 글 보여주기
         else:
             products = Product.objects.all()  # 전부 다 가져와
-        serializer = ProductSerializer(products, many=True)  # 형식에 맞추어 데이터 생성
-        return Response(serializer.data, status=status.HTTP_200_OK)
+            
+        # 페이지네이션 적용
+        paginator = self.pagination_class()
+        result_page = paginator.paginate_queryset(products, request)
+        
+        serializer = ProductSerializer(result_page, many=True)  # 형식에 맞추어 데이터 생성
+        return paginator.get_paginated_response(serializer.data)
 
     # 로그인 상태에서만 가능, 상점 게시글 생성
 
