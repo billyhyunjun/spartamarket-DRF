@@ -45,7 +45,6 @@ class ProductsView(APIView):
         categories = request.data.get("categories")
         hashtags = request.data.get("hashtags")
         request.data["author"] = request.user.id
-        image = request.FILES.get("image")
         serializer = ProductSerializer(data=request.data)
         # 유효성 검사
         if serializer.is_valid(raise_exception=True):
@@ -66,11 +65,6 @@ class ProductsView(APIView):
                     category, _ = Category.objects.get_or_create(
                         name=category_data['name'])
                     product.categories.add(category)
-            if image:
-                # 이미지를 Product 모델의 image 필드에 할당
-                product.image = image
-                # 저장
-                product.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
