@@ -53,17 +53,18 @@ class ProductsView(APIView):
             # 방금 저장했던 게시글 가져오기
             product = Product.objects.all().last()
             # 해시태그 하나씩 꺼내서 중복 검사하고 게시글에 저장
-            for hashtag_data in hashtags:
-                hashtag_data['tag'] = hashtag_data['tag'].upper()
-                hashtag, _ = Hashtag.objects.get_or_create(
-                    tag=hashtag_data['tag'])
-                product.hashtags.add(hashtag)
-            # 카테고리도 마찬가지로 중복검사 및 저장
-            for category_data in categories:
-                category, _ = Category.objects.get_or_create(
-                    name=category_data['name'])
-                product.categories.add(category)
-
+            if hashtags:
+                for hashtag_data in hashtags:
+                    hashtag_data['tag'] = hashtag_data['tag'].upper()
+                    hashtag, _ = Hashtag.objects.get_or_create(
+                        tag=hashtag_data['tag'])
+                    product.hashtags.add(hashtag)
+            if categories:
+                # 카테고리도 마찬가지로 중복검사 및 저장
+                for category_data in categories:
+                    category, _ = Category.objects.get_or_create(
+                        name=category_data['name'])
+                    product.categories.add(category)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
