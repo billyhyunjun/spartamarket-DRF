@@ -1,53 +1,29 @@
-# 🗣️Project: spartamarket-DRF
-### Django_DRF로 작성한 spartamarket
-
-<br>
-
-## 👨‍🏫 Project Introduction
-SpartaMarket는 Django_DRF를 이용하여 백앤드에서 자료를 받아 데이터 베이스에 저장하는 방식을 이용한 프로젝트입니다.
+# 🗣️Project: spartamarket
+### Django로 작성한 spartamarket
 
 <br>
 
 ## ⏲️ Development time
-- 2024.04.29(월) ~ 2023.05.02(목)
-- 아이디어 노트 작성
-- 와이어프레임
-- 기능구현
-- 발표
+- 2024.04.22(월) ~ 2023.05.02(목)
+- 게시글 커뮤티니와 물건 판매기능이 가능한 웹페이지 배포까지 수행하여 정상적인 실행이 가능하도록 하는 것이 목적
 <br>
 
 ## 🧑‍🤝‍🧑 Development Function: 
-- **사용자 계정** : 회원가입, 로그인, 로그아웃 기능을 제공합니다. 
-- **상점 관리** : 상점 등록, 수정, 삭제, 구매, 좋아요, 해시태그, 카테고리 기능을 제공합니다. 또한 검색을 통해서 원하는 게시글을 검색 할 수 있습니다.
-- **유저 프로필 및 기타 기능** : 유저 프로필 보기, 팔로우의 기능을 지원합니다.
+- 사용자 인증 및 프로필 관리 기능.
+- 판매/게시글 작성, 수정, 삭제 기능.
+- 좋아요 및 댓글 기능.
+- 포인트를 이용한 카드뽑기 및 수집 기능
+- 판매/게시글 필터링 및 정렬 기능.
 
 <br>
 
 ## 💻 Development Environment
 - **Programming Language** : Python 3.12
 - **Web Framework** : Django
-- **Template Engine** : Jinja2
-- **Database** : SQLite3 (for development and testing)
-- **IDE** : Visual Studio Code
+- **Database** : SQLite3
 - **Version Control** : Git, GitHub
-<br>
-
-## ⚙️ Technology Stack
-- **Backend** : Django
-- **Database ORMR** : SQLite3
-- **Idea Brainstorming Tools and Environments** : figmam, drow.io
-<br>
-
-## 📝 Project Architecture
-
-- **WireFrame**
-
-https://www.figma.com/file/KLAi2WghRyyMJGMVMDvNb8/SpartaMarket_DRF?type=whiteboard&node-id=0-1&t=0cbuzv9KO2j3BG2U-0
-
-- **ERD**
-
-https://app.diagrams.net/#G1VK_R85V6tnn5qrfNOdDxszWH0Wu17HJT#%7B%22pageId%22%3A%22R2lEEEUBdFMjLlhIrx00%22%7D
-
+- **Server Deployment** : AWS EC2 (t1.micro)
+- **Idea Brainstorming Tools** : [figma](https://www.figma.com/board/AUgJMaoptrCo32HkvGSYhS/sparta_market?node-id=0-1&t=ejx4qWt9wHHgTUV4-1)
 <br>
 
 ## 🖥️Poatman View
